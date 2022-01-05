@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #eaeeec;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="타원_204" data-name="타원 204" class="cls-1">
+    <ellipse class="cls-2" cx="13.5" cy="13.5" rx="13.5" ry="13.5"/>
+    <ellipse class="cls-3" cx="13.5" cy="13.5" rx="11" ry="11"/>
+  </g>
+</svg>

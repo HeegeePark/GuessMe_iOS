@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23.217" height="25.012" viewBox="0 0 23.217 25.012">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #eaeeec;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #de0022;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="구성_요소_2_1" data-name="구성 요소 2 – 1" transform="translate(1.858 1.672)">
+    <path id="패스_66" data-name="패스 66" class="cls-1" d="M0,0,19.5,21.667"/>
+    <line id="선_19" data-name="선 19" class="cls-2" y1="21.667" x2="19.5"/>
+  </g>
+</svg>
