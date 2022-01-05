@@ -1,0 +1,6 @@
+module Pods_GuessMe_iOS_GuessMe_iOSUITests {
+  umbrella header "Pods-GuessMe_iOS-GuessMe_iOSUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
