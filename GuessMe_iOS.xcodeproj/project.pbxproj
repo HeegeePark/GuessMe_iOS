@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06243C812785B83B009EC79C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 06243C802785B83B009EC79C /* .gitignore */; };
 		2376D4B2901F0843A44994C6 /* libPods-GuessMe_iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E21229F8D21DC6413A4FB1BA /* libPods-GuessMe_iOSTests.a */; };
 		4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C42785699E0082D259 /* AppDelegate.swift */; };
 		4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C62785699E0082D259 /* SceneDelegate.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06243C802785B83B009EC79C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		288071CEA52D49557F7512AD /* Pods-GuessMe_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		404E5CA238A6D18EC950C473 /* libPods-GuessMe_iOS-GuessMe_iOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GuessMe_iOS-GuessMe_iOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0840C12785699E0082D259 /* GuessMe_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessMe_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,13 +103,13 @@
 				288071CEA52D49557F7512AD /* Pods-GuessMe_iOSTests.debug.xcconfig */,
 				D96A943159DF4AB2C594DDA3 /* Pods-GuessMe_iOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		4F0840B82785699E0082D259 = {
 			isa = PBXGroup;
 			children = (
+				06243C802785B83B009EC79C /* .gitignore */,
 				4F0840C32785699E0082D259 /* GuessMe_iOS */,
 				4F0840DA2785699F0082D259 /* GuessMe_iOSTests */,
 				4F0840E42785699F0082D259 /* GuessMe_iOSUITests */,
@@ -275,6 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06243C812785B83B009EC79C /* .gitignore in Resources */,
 				4F0840D12785699F0082D259 /* LaunchScreen.storyboard in Resources */,
 				4F0840CE2785699F0082D259 /* Assets.xcassets in Resources */,
 				4F0840CC2785699E0082D259 /* Main.storyboard in Resources */,
