@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController{
     
     //MARK: - Private
     private func setUpLayout(){
+        view.backgroundColor = .white
         let title = UILabel().then{
             $0.text = "회원가입"
             $0.textColor = .accentColor
@@ -140,12 +141,44 @@ class SignUpViewController: UIViewController{
                 $0.leading.equalTo(nicknameLabel)
             }
         }
+        
+        signUpButton = UIButton().then{
+            $0.setTitle("회원가입", for: .normal)
+            $0.titleLabel?.font = .systemFont(ofSize: 25, weight: .regular)
+            $0.titleLabel?.attributedText =  NSMutableAttributedString(string:$0.titleLabel!.text!).then{
+                $0.addAttributes([NSAttributedString.Key.kern: 20], range: NSRange(location: 0, length: $0.string.count))
+            }
+            $0.backgroundColor = .mainColor
+            self.view.addSubview($0)
+            
+            $0.snp.makeConstraints{
+                $0.bottom.equalToSuperview()
+                $0.height.equalTo(100)
+                $0.leading.equalToSuperview()
+                $0.width.equalTo(self.view.frame.width * 3 / 4)
+            }
+        }
+        
+        signUPNextButton = UIButton().then{
+            $0.setImage(UIImage(systemName: "greaterthan", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25,weight: .regular, scale: .large))?.withTintColor(.white, renderingMode: .alwaysOriginal),for: .normal)
+            $0.backgroundColor = .accentColor
+            self.view.addSubview($0)
+            
+            $0.snp.makeConstraints{
+                $0.bottom.equalToSuperview()
+                $0.height.equalTo(signUpButton)
+                $0.leading.equalTo(signUpButton.snp.trailing)
+                $0.trailing.equalToSuperview()
+            }
+        }
     }
     
     private weak var nicknameTextField: UITextField!
     private weak var passwordTextField: UITextField!
     private weak var repeatPasswordTextField: UITextField!
     private weak var nicknameCheckButton: UIButton!
+    private weak var signUpButton: UIButton!
+    private weak var signUPNextButton: UIButton!
     private weak var passwordNotMatchLabel : UILabel!
     
 }

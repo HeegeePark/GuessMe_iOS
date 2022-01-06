@@ -1,6 +1,0 @@
-module Pods_GuessMe_iOS {
-  umbrella header "Pods-GuessMe_iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}
