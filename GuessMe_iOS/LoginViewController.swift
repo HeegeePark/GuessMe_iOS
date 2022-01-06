@@ -11,7 +11,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 import Then
-class LoginViewController: ViewController{
+class LoginViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
