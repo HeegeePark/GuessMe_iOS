@@ -143,7 +143,7 @@ class SignUpViewController: UIViewController{
         }
         
         signUpButton = UIButton().then{
-            $0.setTitle("회원가입", for: .normal)
+            $0.setTitle("가입하기", for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 25, weight: .regular)
             $0.titleLabel?.attributedText =  NSMutableAttributedString(string:$0.titleLabel!.text!).then{
                 $0.addAttributes([NSAttributedString.Key.kern: 20], range: NSRange(location: 0, length: $0.string.count))
