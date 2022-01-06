@@ -16,15 +16,30 @@ class LoginViewController: ViewController{
         super.viewDidLoad()
         setLayout()
         setLoginButton()
+        setSignUpLabel()    
     }
     
     //MARK: - Private
+    
+    //MARK: - 회원가입 Label 설정
+    @objc
+    private func tapSignUpLabel(){
+        let signUpVC = SignUpViewController()
+        signUpVC.modalPresentationStyle = .fullScreen
+        present(signUpVC, animated: true)
+    }
+    private func setSignUpLabel(){
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tapSignUpLabel))
+        signUpLabel.isUserInteractionEnabled = true
+        signUpLabel.addGestureRecognizer(gesture)
+        
+    }
+    
     //MARK: - 로그인 버튼 설정
     private func setLoginButton(){
         //로그인 버튼 터치 시
         loginButton.rx.controlEvent(.touchDown).observeOn(MainScheduler.instance).subscribe(onNext:{
             UIView.animate(withDuration: 0.3){
-                
                 var hue:CGFloat = 0,saturation:CGFloat = 0,brightness:CGFloat = 0,alpha:CGFloat = 0
                 UIColor.accentColor?.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
                 
@@ -54,7 +69,7 @@ class LoginViewController: ViewController{
             
             $0.snp.makeConstraints{
                 $0.centerX.equalToSuperview()
-                $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(50)
+                $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.top).offset(70)
             }
         }
         
@@ -109,6 +124,7 @@ class LoginViewController: ViewController{
             $0.layer.cornerRadius = 25
             $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.height))
             $0.leftViewMode = .always
+            $0.isSecureTextEntry = true
             self.view.addSubview($0)
             
             $0.snp.makeConstraints{
@@ -131,7 +147,7 @@ class LoginViewController: ViewController{
             }
         }
         
-        let signUpLabel = UILabel().then{
+        signUpLabel = UILabel().then{
             $0.text = "회원가입"
             $0.textColor = .darkPinkColor
             $0.font = .systemFont(ofSize: 15, weight: .bold)
@@ -145,6 +161,7 @@ class LoginViewController: ViewController{
     }
     
     private var disposeBag = DisposeBag()
+    private weak var signUpLabel: UILabel!
     private weak var idTextField: UITextField!
     private weak var passwordTextField: UITextField!
     private weak var loginButton: UIButton!
