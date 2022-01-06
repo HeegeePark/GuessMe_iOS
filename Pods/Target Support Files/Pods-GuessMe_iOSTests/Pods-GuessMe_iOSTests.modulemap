@@ -1,0 +1,6 @@
+framework module Pods_GuessMe_iOSTests {
+  umbrella header "Pods-GuessMe_iOSTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
