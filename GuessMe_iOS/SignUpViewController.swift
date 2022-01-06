@@ -160,7 +160,7 @@ class SignUpViewController: UIViewController{
         }
         
         signUPNextButton = UIButton().then{
-            $0.setImage(UIImage(systemName: "greaterthan"), for: .normal)
+            $0.setImage(UIImage(systemName: "greaterthan", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25,weight: .regular, scale: .large))?.withTintColor(.white, renderingMode: .alwaysOriginal),for: .normal)
             $0.backgroundColor = .accentColor
             self.view.addSubview($0)
             
