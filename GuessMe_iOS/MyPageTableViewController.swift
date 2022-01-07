@@ -67,7 +67,7 @@ class MyPageTableViewController : UIViewController{
         }
     }
     
-    public let tableView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    fileprivate let tableView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     private weak var menuButton : UIButton!
 }
 
