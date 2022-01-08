@@ -12,13 +12,13 @@ target 'GuessMe_iOS' do
 
   # Pods for GuessMe_iOS
 
-  target 'GuessMe_iOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'GuessMe_iOSUITests' do
-    # Pods for testing
-  end
+#  target 'GuessMe_iOSTests' do
+#    inherit! :search_paths
+#    # Pods for testing
+#  end
+#
+#  target 'GuessMe_iOSUITests' do
+#    # Pods for testing
+#  end
 
 end
