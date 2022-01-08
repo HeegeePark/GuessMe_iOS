@@ -17,12 +17,16 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLayout()
+//        setEnterButton()
     }
     
     // MARK: - UI Components
-    private var disposeBag = DisposeBag()
     private weak var searchTextfield: UITextField!
     private weak var searchButton: UIButton!
+    
+    private let viewModel = MainViewModel()
+    private let disposeBag = DisposeBag()
+    
     
     // 탭바 (일단 보류)
 //    static func instance() -> UINavigationController {
@@ -33,8 +37,29 @@ class MainViewController: UIViewController {
 //                tag: 1)
 //        }
 //    }
-
     
+    // MARK: - Actions
+    private func bindViewModel() {
+        // bind input
+        self.searchTextfield.rx.text.orEmpty
+            .bind(to: self.viewModel.input.nickName)
+            .disposed(by: disposeBag)
+        
+        self.searchButton.rx.tap
+            .bind(to: self.viewModel.input.tapButton)
+            .disposed(by: disposeBag)
+        
+        // bind output
+        self.viewModel.output
+            .showErrorAlert
+            .bind(onNext: self.showErrorAlert)
+            .disposed(by: disposeBag)
+    }
+    
+    private func showErrorAlert() {
+        // 에러 알럿
+    }
+
     // MARK: - 레이아웃 설정
     private func setUpLayout() {
         // 로고
@@ -56,16 +81,25 @@ class MainViewController: UIViewController {
             $0.layer.cornerRadius = 17
             $0.placeholder = "Search"
             $0.font = .systemFont(ofSize: 12, weight: .regular)
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: $0.frame.height))
-            imageView.image = UIImage(named: "icon_main_search")
-            imageView.contentMode = .scaleAspectFit
-            $0.leftView = imageView
+            $0.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: $0.frame.height))
             $0.leftViewMode = .always
             self.view.addSubview($0)
 
             $0.snp.makeConstraints {
                 $0.centerY.equalToSuperview()
                 $0.leading.equalToSuperview().offset(10)
+            }
+        }
+        
+        // 텍스트필드의 돋보기 이미지
+        _ = UIImageView().then {
+            $0.image = UIImage(named: "icon_main_search")
+            $0.contentMode = .scaleAspectFit
+            self.view.addSubview($0)
+
+            $0.snp.makeConstraints {
+                $0.centerY.equalToSuperview()
+                $0.leading.equalTo(self.searchTextfield.snp.leading).offset(12)
             }
         }
         
@@ -79,7 +113,6 @@ class MainViewController: UIViewController {
             $0.snp.makeConstraints {
                 $0.top.equalTo(self.searchTextfield.snp.top).inset(UIEdgeInsets(top:-25, left: 0, bottom: 0, right: 0))
                 $0.leading.equalTo(self.searchTextfield.snp.leading).offset(20)
-
             }
         }
         
@@ -100,9 +133,7 @@ class MainViewController: UIViewController {
                 $0.trailing.equalToSuperview().inset(10)
             }
         }
-        
     }
-
 }
 
 //MARK: - Preview

@@ -24,6 +24,7 @@
 		4F0840DC2785699F0082D259 /* GuessMe_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840DB2785699F0082D259 /* GuessMe_iOSTests.swift */; };
 		4F0840E62785699F0082D259 /* GuessMe_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840E52785699F0082D259 /* GuessMe_iOSUITests.swift */; };
 		4F0840E82785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840E72785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift */; };
+		4F5ACFCB2789E98400A62002 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ACFCA2789E98400A62002 /* MainViewModel.swift */; };
 		8D21F0BAA9207F7DC504264B /* libPods-GuessMe_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8DB85776524488C64C150A /* libPods-GuessMe_iOS.a */; };
 		F0CF757CD38E42E4DE471E24 /* libPods-GuessMe_iOS-GuessMe_iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 404E5CA238A6D18EC950C473 /* libPods-GuessMe_iOS-GuessMe_iOSUITests.a */; };
 /* End PBXBuildFile section */
@@ -68,6 +69,7 @@
 		4F0840E12785699F0082D259 /* GuessMe_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessMe_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0840E52785699F0082D259 /* GuessMe_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessMe_iOSUITests.swift; sourceTree = "<group>"; };
 		4F0840E72785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessMe_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4F5ACFCA2789E98400A62002 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		54C031AEB7A1F0064AEEE624 /* Pods-GuessMe_iOS-GuessMe_iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOS-GuessMe_iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOS-GuessMe_iOSUITests/Pods-GuessMe_iOS-GuessMe_iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6EBAB27AE6DEAC30255A107E /* Pods-GuessMe_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOS.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AE64331BADBCDBD28D1F6476 /* Pods-GuessMe_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOS.release.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				4F0840C42785699E0082D259 /* AppDelegate.swift */,
 				4F0840C62785699E0082D259 /* SceneDelegate.swift */,
 				4F0840C82785699E0082D259 /* MainViewController.swift */,
+				4F5ACFCA2789E98400A62002 /* MainViewModel.swift */,
 				4F0840CA2785699E0082D259 /* Main.storyboard */,
 				4F0840CD2785699F0082D259 /* Assets.xcassets */,
 				4F0840CF2785699F0082D259 /* LaunchScreen.storyboard */,
@@ -405,11 +408,12 @@
 				0621F7B12785EE1000BF5F17 /* LoginViewController.swift in Sources */,
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
 				0653E17C2788769900F92249 /* MyPageTableViewController.swift in Sources */,
-				4F0840C92785699E0082D259 /* ViewController.swift in Sources */,
+				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
 				4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */,
 				4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */,
 				0653E1802788792300F92249 /* MyPageTableViewCell.swift in Sources */,
 				0621F7B42785EFB200BF5F17 /* UIColor+.swift in Sources */,
+				4F5ACFCB2789E98400A62002 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
