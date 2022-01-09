@@ -16,7 +16,8 @@
 		0653E182278A709100F92249 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0621F7B02785EE1000BF5F17 /* LoginViewController.swift */; };
 		0653E187278A71CB00F92249 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E186278A71CB00F92249 /* LoginViewModel.swift */; };
 		0653E189278A72D500F92249 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E188278A72D500F92249 /* Api.swift */; };
-		2376D4B2901F0843A44994C6 /* libPods-GuessMe_iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E21229F8D21DC6413A4FB1BA /* libPods-GuessMe_iOSTests.a */; };
+		0653E18D278A7F0900F92249 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E18C278A7F0900F92249 /* SignUpViewModel.swift */; };
+		06E1DAE5278A9AB500F2FD76 /* TokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAE4278A9AB500F2FD76 /* TokenInterceptor.swift */; };
 		4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C42785699E0082D259 /* AppDelegate.swift */; };
 		4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C62785699E0082D259 /* SceneDelegate.swift */; };
 		4F0840C92785699E0082D259 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C82785699E0082D259 /* MainViewController.swift */; };
@@ -27,7 +28,8 @@
 		4F0840E62785699F0082D259 /* GuessMe_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840E52785699F0082D259 /* GuessMe_iOSUITests.swift */; };
 		4F0840E82785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840E72785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift */; };
 		4F5ACFCB2789E98400A62002 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ACFCA2789E98400A62002 /* MainViewModel.swift */; };
-		8D21F0BAA9207F7DC504264B /* libPods-GuessMe_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8DB85776524488C64C150A /* libPods-GuessMe_iOS.a */; };
+		EE95A97BED064D497D5A66AE /* Pods_GuessMe_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCB89D016A9E3D74DF8E122C /* Pods_GuessMe_iOSTests.framework */; };
+		FAB89886D3D53C3612A5302F /* Pods_GuessMe_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 443B4D71CD87CE38E2B5C099 /* Pods_GuessMe_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +59,10 @@
 		0653E17F2788792300F92249 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		0653E186278A71CB00F92249 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0653E188278A72D500F92249 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		0653E18C278A7F0900F92249 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		06E1DAE4278A9AB500F2FD76 /* TokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInterceptor.swift; sourceTree = "<group>"; };
 		288071CEA52D49557F7512AD /* Pods-GuessMe_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		443B4D71CD87CE38E2B5C099 /* Pods_GuessMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuessMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0840C12785699E0082D259 /* GuessMe_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessMe_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0840C42785699E0082D259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F0840C62785699E0082D259 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,8 +80,7 @@
 		6EBAB27AE6DEAC30255A107E /* Pods-GuessMe_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOS.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AE64331BADBCDBD28D1F6476 /* Pods-GuessMe_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOS.release.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS.release.xcconfig"; sourceTree = "<group>"; };
 		D96A943159DF4AB2C594DDA3 /* Pods-GuessMe_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOSTests.release.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		E21229F8D21DC6413A4FB1BA /* libPods-GuessMe_iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GuessMe_iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EF8DB85776524488C64C150A /* libPods-GuessMe_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GuessMe_iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DCB89D016A9E3D74DF8E122C /* Pods_GuessMe_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuessMe_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D21F0BAA9207F7DC504264B /* libPods-GuessMe_iOS.a in Frameworks */,
+				FAB89886D3D53C3612A5302F /* Pods_GuessMe_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2376D4B2901F0843A44994C6 /* libPods-GuessMe_iOSTests.a in Frameworks */,
+				EE95A97BED064D497D5A66AE /* Pods_GuessMe_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +125,15 @@
 				0653E186278A71CB00F92249 /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		0653E18B278A7EC800F92249 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				06243C8D27869B58009EC79C /* SignUpViewController.swift */,
+				0653E18C278A7F0900F92249 /* SignUpViewModel.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 		06A29097A1E49EDB4B5C1E9C /* Pods */ = {
@@ -160,6 +173,7 @@
 		4F0840C32785699E0082D259 /* GuessMe_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				0653E18B278A7EC800F92249 /* SignUp */,
 				0653E181278A702900F92249 /* Login */,
 				0621F7B22785EFB200BF5F17 /* Extension */,
 				4F0840C42785699E0082D259 /* AppDelegate.swift */,
@@ -170,11 +184,11 @@
 				4F0840CD2785699F0082D259 /* Assets.xcassets */,
 				4F0840CF2785699F0082D259 /* LaunchScreen.storyboard */,
 				4F0840D22785699F0082D259 /* Info.plist */,
-				06243C8D27869B58009EC79C /* SignUpViewController.swift */,
 				0653E17B2788769900F92249 /* MyPageTableViewController.swift */,
 				0653E17F2788792300F92249 /* MyPageTableViewCell.swift */,
 				0653E17D2788776900F92249 /* Rank.swift */,
 				0653E188278A72D500F92249 /* Api.swift */,
+				06E1DAE4278A9AB500F2FD76 /* TokenInterceptor.swift */,
 			);
 			path = GuessMe_iOS;
 			sourceTree = "<group>";
@@ -199,8 +213,8 @@
 		B2D3F68772B2844D7EBCEAB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EF8DB85776524488C64C150A /* libPods-GuessMe_iOS.a */,
-				E21229F8D21DC6413A4FB1BA /* libPods-GuessMe_iOSTests.a */,
+				443B4D71CD87CE38E2B5C099 /* Pods_GuessMe_iOS.framework */,
+				DCB89D016A9E3D74DF8E122C /* Pods_GuessMe_iOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -216,6 +230,7 @@
 				4F0840BD2785699E0082D259 /* Sources */,
 				4F0840BE2785699E0082D259 /* Frameworks */,
 				4F0840BF2785699E0082D259 /* Resources */,
+				87B4F8A9026840A7E7C5AA82 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -234,6 +249,7 @@
 				4F0840D32785699F0082D259 /* Sources */,
 				4F0840D42785699F0082D259 /* Frameworks */,
 				4F0840D52785699F0082D259 /* Resources */,
+				0485E9E9EE684F4AEB2D4DF1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -335,6 +351,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0485E9E9EE684F4AEB2D4DF1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		53F8F0CC74A09AA5803E7414 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -355,6 +388,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87B4F8A9026840A7E7C5AA82 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		903C7138753E58B93D192DDB /* [CP] Check Pods Manifest.lock */ = {
@@ -392,6 +442,8 @@
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
 				0653E17C2788769900F92249 /* MyPageTableViewController.swift in Sources */,
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
+				0653E18D278A7F0900F92249 /* SignUpViewModel.swift in Sources */,
+				06E1DAE5278A9AB500F2FD76 /* TokenInterceptor.swift in Sources */,
 				4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */,
 				4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */,
 				0653E189278A72D500F92249 /* Api.swift in Sources */,

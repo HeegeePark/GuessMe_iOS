@@ -49,7 +49,60 @@ final class Api{
         }
     }
     
+    public func signUp(id:String, password:String) -> Completable{
+        let url = baseUrl + "users"
+        let param: Parameters = [
+            "nickname":id,
+            "password":password
+        ]
+        
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+            return .create{
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+        
+        return .create{completable in
+            AF.request(encodedUrl, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON{
+                switch $0.result{
+                case .success(_):
+                    completable(.completed)
+                case .failure(let error):
+                    completable(.error(error))
+                }
+            }
+            
+            return Disposables.create {}
+        }
+    }
+    
+    public func isExist(id:String) -> Single<JSON>{
+        let url = baseUrl + "users/\(id)"
+                
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+            return .create{
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+
+        
+        return .create{single in
+            AF.request(encodedUrl, method: .get).responseJSON{
+                switch $0.result{
+                case .success(let data):
+                    let json = JSON(data)
+                    single(.success(json))
+                case .failure(let error):
+                    single(.error(error))
+                }
+            }
+            return Disposables.create {}
+        }
+    }
     //MARK: -Private
     private let baseUrl = "https://guessme-ios.herokuapp.com/"
+    private let interceptor = TokenInterceptor()
     private init(){}
 }
