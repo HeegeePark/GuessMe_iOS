@@ -17,8 +17,8 @@ final class LoginViewModel{
                     single(.success(false))
                 }
                 else{
-                    let nickname = $0["nickname"].stringValue
-                    UserDefaults.standard.setValue(nickname, forKey: "nickname")
+                    let id = $0["nickname"].stringValue
+                    UserDefaults.standard.setValue(id, forKey: "id")
                     single(.success(true))
                 }
             }, onError: {
