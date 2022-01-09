@@ -87,7 +87,6 @@ final class Api{
             }
         }
 
-        
         return .create{single in
             AF.request(encodedUrl, method: .get).responseJSON{
                 switch $0.result{
@@ -100,6 +99,61 @@ final class Api{
             }
             return Disposables.create {}
         }
+    }
+    
+    public func getRank() -> Single<[Rank]>{
+        let url = baseUrl + "users/rank"
+                
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+            return .create{
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+        
+        return .create{single in
+            AF.request(encodedUrl, method: .get, interceptor: self.interceptor).responseJSON{
+                switch $0.result{
+                case .success(let data):
+                    let json = JSON(data)
+                    var cnt = 1
+                    let rankList = json["ranking"].arrayValue.map{data -> Rank in
+                        let answerer =  data["answerer"].dictionaryValue
+                        let rank = Rank(rank: cnt, nickname:answerer["nickname"]!.stringValue, score: data["score"].intValue)
+                        cnt += 1
+                        return rank
+                    }
+                    single(.success(rankList))
+                case .failure(let error):
+                    single(.error(error))
+                }
+            }
+            return Disposables.create {}
+        }
+    }
+    
+    public func deleteQuiz() -> Completable{
+        let url = baseUrl + "quizzes"
+                
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+            return .create{
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+        
+        return .create{completable in
+            AF.request(encodedUrl,method: .delete ,interceptor: self.interceptor).response{
+                switch $0.result{
+                case .success(_):
+                    completable(.completed)
+                case .failure(let error):
+                    completable(.error(error))
+                }
+            }
+            return Disposables.create {}
+        }
+
     }
     //MARK: -Private
     private let baseUrl = "https://guessme-ios.herokuapp.com/"

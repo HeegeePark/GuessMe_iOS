@@ -15,11 +15,13 @@ import RxCocoa
 class MyPageTableViewController : UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTableView()
-        setLayout()
+        setUp()
     }
-    
-    // 탭바 연결
+    override func viewWillDisappear(_ animated: Bool) {
+        disposeBag = DisposeBag()
+        viewModel.disposeBag = DisposeBag()
+    }
+    //MARK: -  탭바 연결
     static func instance() -> UINavigationController {
         let mypageVC = MyPageTableViewController(nibName: nil, bundle: nil).then {
             $0.tabBarItem = UITabBarItem(
@@ -36,12 +38,43 @@ class MyPageTableViewController : UIViewController{
     
     //MARK: - Private
     
-    //MARK: - 테이블 뷰 설정
-    private func setTableView(){
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(MyPageTableViewCell.self, forCellWithReuseIdentifier: "cell")
-        
+    //MARK: - setUp
+    private func setUp(){
+        setLayout()
+        setMenuButton()
+    }
+    //MARK: - 메뉴 버튼 설정
+    private func setMenuButton(){
+        menuButton.rx.tap.observeOn(MainScheduler.instance).subscribe(onNext:{
+            let alert = UIAlertController()
+            alert.addAction(UIAlertAction(title: "퀴즈 삭제", style: .default, handler: {_ in
+                self.viewModel.deleteQuiz().observeOn(MainScheduler.instance).subscribe(onCompleted: {
+                    let alert = UIAlertController(title: "내 정보", message: "퀴즈 삭제 성공", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: {_ in
+                        let vc = QuizViewController()
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc,animated: true, completion: {
+                            self.presentingViewController?.dismiss(animated: true)
+                        })
+                        self.present(alert, animated: true)
+                    }))
+                }, onError: {
+                    print($0.localizedDescription)
+                    let alert = UIAlertController(title: "내 정보", message: "서버 에러", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                    self.present(alert, animated: true)
+                    
+                }).disposed(by: self.disposeBag)
+            }))
+            alert.addAction(UIAlertAction(title: "로그아웃", style: .default, handler: {_ in
+                UserDefaults.standard.removeObject(forKey: "token")
+                UserDefaults.standard.removeObject(forKey: "nickname")
+                self.presentingViewController?.dismiss(animated: true)
+            }))
+            alert.addAction(UIAlertAction(title: "닫기", style: .cancel))
+            
+            self.present(alert,animated: true)
+        }).disposed(by: self.disposeBag)
     }
     
     //MARK: - 레이아웃 설정
@@ -60,7 +93,8 @@ class MyPageTableViewController : UIViewController{
         }
         
         let title = UILabel().then{
-            $0.text = "이땡님의 퀴즈 순위"
+            let nickname = UserDefaults.standard.string(forKey: "nickname")
+            $0.text = "\(nickname!)의 퀴즈 순위"
             $0.font = .systemFont(ofSize: 40, weight: .bold)
             $0.textColor = .accentColor
             self.view.addSubview($0)
@@ -81,7 +115,13 @@ class MyPageTableViewController : UIViewController{
         }
     }
     
-    fileprivate let tableView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let viewModel = MyPageViewModel()
+    private var disposeBag = DisposeBag()
+    fileprivate lazy var tableView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then{
+        $0.delegate = self
+        $0.dataSource = self
+        $0.register(MyPageTableViewCell.self, forCellWithReuseIdentifier: "cell")
+    }
     private weak var menuButton : UIButton!
 }
 
@@ -91,18 +131,16 @@ extension MyPageTableViewController: UICollectionViewDelegateFlowLayout, UIColle
         return CGSize(width: collectionView.frame.width - 70, height: 80)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Rank.getDummy().count
+        return self.viewModel.rankList.capacity
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 25
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("test")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyPageTableViewCell
-        let rank = Rank.getDummy()[indexPath.row]
+        let rank = self.viewModel.rankList[indexPath.row]
         cell.bind(rank: rank)
-
         
         return cell
     }
