@@ -16,7 +16,11 @@ class SignUpViewController: UIViewController{
         super.viewDidLoad()
         setUp()
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        disposeBag = DisposeBag()
+        viewModel.disposeBag = DisposeBag()
+    }
     //MARK: - Private
     
     //MARK: - setUp
