@@ -127,6 +127,7 @@ class LoginViewController: UIViewController{
                     }).disposed(by: self.disposeBag)
                 }
                 else{
+                    self.stopLoading()
                     let alert = UIAlertController(title: "로그인", message: "아이디 혹은 비밀번호가 맞지 않습니다.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                     self.present(alert, animated: true)
