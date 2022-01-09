@@ -131,7 +131,32 @@ final class Api{
             return Disposables.create {}
         }
     }
-    
+    public func isUserHasQuiz(nickname: String) -> Single<Bool>{
+        let url = baseUrl + "quizzes/\(nickname)"
+                
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+            return .create{
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+        
+        return .create{single in
+            AF.request(url,method: .get, interceptor: self.interceptor).responseJSON{
+                switch $0.result{
+                case .success(let data):
+                    let json = JSON(data)["_embedded"]
+                    let quizList = json["quizList"].arrayValue
+                    single(.success(!quizList.isEmpty))
+                case .failure(let error):
+                    single(.error(error))
+                }
+            }
+            
+            return Disposables.create {}
+        }
+
+    }
     public func deleteQuiz() -> Completable{
         let url = baseUrl + "quizzes"
                 
