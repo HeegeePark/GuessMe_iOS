@@ -28,4 +28,10 @@ final class LoginViewModel{
             return Disposables.create {}
         }
     }
+    
+    public func isUserHasQuiz() -> Single<Bool>{
+        let nickname = UserDefaults.standard.string(forKey: "nickname")!
+        return Api.shared.isUserHasQuiz(nickname: nickname)
+        
+    }
 }

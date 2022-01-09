@@ -16,11 +16,36 @@ class LoginViewController: UIViewController{
         super.viewDidLoad()
         setUp()
     }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUp()
         viewModel = LoginViewModel()
+        if let _ = UserDefaults.standard.string(forKey: "token"){
+            self.startLoading()
+            self.viewModel.isUserHasQuiz().observeOn(MainScheduler.instance).subscribe(onSuccess: {
+                var vc: UIViewController
+                if $0{//퀴즈를 가지고 있을 때
+                    vc = TabBarController()
+                    
+                }
+                else{
+                    vc = QuizViewController()
+                }
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true){
+                    self.stopLoading()
+                }
+            }, onError: {
+                print($0.localizedDescription)
+                let alert = UIAlertController(title: "로그인", message: "서버 에러", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                self.present(alert, animated: true)
+            }).disposed(by: self.disposeBag)
+        }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         disposeBag = DisposeBag()
@@ -80,11 +105,26 @@ class LoginViewController: UIViewController{
             }
             self.startLoading()
             self.viewModel.login(id:id, password: password).subscribe(onSuccess: {
-                self.stopLoading()
                 if $0{
-                    let vc = TabBarController()
-                    vc.modalPresentationStyle = .fullScreen
-                    self.present(vc, animated: true)
+                    self.viewModel.isUserHasQuiz().observeOn(MainScheduler.instance).subscribe(onSuccess: {
+                        var vc: UIViewController
+                        if $0{//퀴즈를 가지고 있을 때
+                            vc = TabBarController()
+                            
+                        }
+                        else{
+                            vc = QuizViewController()
+                        }
+                        vc.modalPresentationStyle = .fullScreen
+                        self.present(vc, animated: true){
+                            self.stopLoading()
+                        }
+                    }, onError: {
+                        print($0.localizedDescription)
+                        let alert = UIAlertController(title: "로그인", message: "서버 에러", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                        self.present(alert, animated: true)
+                    }).disposed(by: self.disposeBag)
                 }
                 else{
                     let alert = UIAlertController(title: "로그인", message: "아이디 혹은 비밀번호가 맞지 않습니다.", preferredStyle: .alert)
