@@ -98,6 +98,7 @@ extension MyPageTableViewController: UICollectionViewDelegateFlowLayout, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("test")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MyPageTableViewCell
         let rank = Rank.getDummy()[indexPath.row]
         cell.bind(rank: rank)

@@ -46,14 +46,14 @@ class LoginViewController: UIViewController{
             
             guard let id = self.idTextField.text , !id.isEmpty else{
                 let alert = UIAlertController(title: "로그인", message: "아이디가 비어있습니다.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "닫기", style: .cancel))
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                 self.present(alert, animated: true)
                 return
             }
             
             guard let password = self.passwordTextField.text, !password.isEmpty else{
                 let alert = UIAlertController(title: "로그인", message: "비밀번호가 비어있습니다.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "닫기", style: .cancel))
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                 self.present(alert, animated: true)
                 return
             }
@@ -67,13 +67,13 @@ class LoginViewController: UIViewController{
                 }
                 else{
                     let alert = UIAlertController(title: "로그인", message: "아이디 혹은 비밀번호가 맞지 않습니다.", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "닫기", style: .cancel))
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                     self.present(alert, animated: true)
                 }
             }, onError: {
                 print($0.localizedDescription)
                 let alert = UIAlertController(title: "로그인", message: "서버 에러", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "닫기", style: .cancel))
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
                 self.present(alert, animated: true)
             }).disposed(by: self.disposeBag)
         }).disposed(by: self.disposeBag)
