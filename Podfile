@@ -9,16 +9,18 @@ target 'GuessMe_iOS' do
   pod 'RxCocoa', '~> 4.0'
   pod 'Alamofire'
   pod 'SwiftyJSON'
-
+  
   # Pods for GuessMe_iOS
-
-#  target 'GuessMe_iOSTests' do
-#    inherit! :search_paths
-#    # Pods for testing
-#  end
-#
-#  target 'GuessMe_iOSUITests' do
-#    # Pods for testing
-#  end
-
+  
+  target 'GuessMe_iOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+    pod 'RxBlocking', '~> 4.0'
+    pod 'RxTest', '~> 4.0'
+  end
+  #
+  #  target 'GuessMe_iOSUITests' do
+  #    # Pods for testing
+  #  end
+  
 end
