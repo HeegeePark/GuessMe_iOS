@@ -20,12 +20,18 @@
 		4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C42785699E0082D259 /* AppDelegate.swift */; };
 		4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C62785699E0082D259 /* SceneDelegate.swift */; };
 		4F0840C92785699E0082D259 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C82785699E0082D259 /* MainViewController.swift */; };
-		4F0840CC2785699E0082D259 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0840CA2785699E0082D259 /* Main.storyboard */; };
 		4F0840CE2785699F0082D259 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F0840CD2785699F0082D259 /* Assets.xcassets */; };
 		4F0840D12785699F0082D259 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F0840CF2785699F0082D259 /* LaunchScreen.storyboard */; };
 		4F0840DC2785699F0082D259 /* GuessMe_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840DB2785699F0082D259 /* GuessMe_iOSTests.swift */; };
 		4F0840E62785699F0082D259 /* GuessMe_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840E52785699F0082D259 /* GuessMe_iOSUITests.swift */; };
 		4F0840E82785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840E72785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift */; };
+		4F1E7F63278AB64400F209C3 /* QuizTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E7F5E278AB64400F209C3 /* QuizTableViewCell.swift */; };
+		4F1E7F64278AB64400F209C3 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E7F5F278AB64400F209C3 /* QuizViewController.swift */; };
+		4F1E7F65278AB64400F209C3 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E7F60278AB64400F209C3 /* Quiz.swift */; };
+		4F1E7F66278AB64400F209C3 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E7F61278AB64400F209C3 /* QuizViewModel.swift */; };
+		4F1E7F67278AB64400F209C3 /* QuizType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E7F62278AB64400F209C3 /* QuizType.swift */; };
+		4F1E7F6A278AB6F500F209C3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E7F69278AB6F500F209C3 /* TabBarController.swift */; };
+		4F1E7F6D278ABAEC00F209C3 /* TabBarTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1E7F6C278ABAEC00F209C3 /* TabBarTag.swift */; };
 		4F5ACFCB2789E98400A62002 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5ACFCA2789E98400A62002 /* MainViewModel.swift */; };
 		8D21F0BAA9207F7DC504264B /* libPods-GuessMe_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF8DB85776524488C64C150A /* libPods-GuessMe_iOS.a */; };
 /* End PBXBuildFile section */
@@ -62,7 +68,6 @@
 		4F0840C42785699E0082D259 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F0840C62785699E0082D259 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		4F0840C82785699E0082D259 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		4F0840CB2785699E0082D259 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F0840CD2785699F0082D259 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F0840D02785699F0082D259 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F0840D22785699F0082D259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +76,13 @@
 		4F0840E12785699F0082D259 /* GuessMe_iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessMe_iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0840E52785699F0082D259 /* GuessMe_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessMe_iOSUITests.swift; sourceTree = "<group>"; };
 		4F0840E72785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessMe_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4F1E7F5E278AB64400F209C3 /* QuizTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizTableViewCell.swift; sourceTree = "<group>"; };
+		4F1E7F5F278AB64400F209C3 /* QuizViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		4F1E7F60278AB64400F209C3 /* Quiz.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		4F1E7F61278AB64400F209C3 /* QuizViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
+		4F1E7F62278AB64400F209C3 /* QuizType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuizType.swift; sourceTree = "<group>"; };
+		4F1E7F69278AB6F500F209C3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		4F1E7F6C278ABAEC00F209C3 /* TabBarTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarTag.swift; sourceTree = "<group>"; };
 		4F5ACFCA2789E98400A62002 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		6EBAB27AE6DEAC30255A107E /* Pods-GuessMe_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOS.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		AE64331BADBCDBD28D1F6476 /* Pods-GuessMe_iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOS.release.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOS/Pods-GuessMe_iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,20 +172,18 @@
 		4F0840C32785699E0082D259 /* GuessMe_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4F1E7F68278AB65800F209C3 /* Model */,
+				4F1E7F5D278AB5D800F209C3 /* Mypage */,
+				4F1E7F5C278AB5BA00F209C3 /* Main */,
+				4F1E7F5B278AB5B300F209C3 /* Quiz */,
 				0653E181278A702900F92249 /* Login */,
 				0621F7B22785EFB200BF5F17 /* Extension */,
 				4F0840C42785699E0082D259 /* AppDelegate.swift */,
 				4F0840C62785699E0082D259 /* SceneDelegate.swift */,
-				4F0840C82785699E0082D259 /* MainViewController.swift */,
-				4F5ACFCA2789E98400A62002 /* MainViewModel.swift */,
-				4F0840CA2785699E0082D259 /* Main.storyboard */,
 				4F0840CD2785699F0082D259 /* Assets.xcassets */,
 				4F0840CF2785699F0082D259 /* LaunchScreen.storyboard */,
 				4F0840D22785699F0082D259 /* Info.plist */,
 				06243C8D27869B58009EC79C /* SignUpViewController.swift */,
-				0653E17B2788769900F92249 /* MyPageTableViewController.swift */,
-				0653E17F2788792300F92249 /* MyPageTableViewCell.swift */,
-				0653E17D2788776900F92249 /* Rank.swift */,
 				0653E188278A72D500F92249 /* Api.swift */,
 			);
 			path = GuessMe_iOS;
@@ -194,6 +204,54 @@
 				4F0840E72785699F0082D259 /* GuessMe_iOSUITestsLaunchTests.swift */,
 			);
 			path = GuessMe_iOSUITests;
+			sourceTree = "<group>";
+		};
+		4F1E7F5B278AB5B300F209C3 /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				4F1E7F5E278AB64400F209C3 /* QuizTableViewCell.swift */,
+				4F1E7F62278AB64400F209C3 /* QuizType.swift */,
+				4F1E7F5F278AB64400F209C3 /* QuizViewController.swift */,
+				4F1E7F61278AB64400F209C3 /* QuizViewModel.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
+		4F1E7F5C278AB5BA00F209C3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4F1E7F6B278ABAD200F209C3 /* tabBar */,
+				4F0840C82785699E0082D259 /* MainViewController.swift */,
+				4F5ACFCA2789E98400A62002 /* MainViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4F1E7F5D278AB5D800F209C3 /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				0653E17B2788769900F92249 /* MyPageTableViewController.swift */,
+				0653E17F2788792300F92249 /* MyPageTableViewCell.swift */,
+			);
+			path = Mypage;
+			sourceTree = "<group>";
+		};
+		4F1E7F68278AB65800F209C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0653E17D2788776900F92249 /* Rank.swift */,
+				4F1E7F60278AB64400F209C3 /* Quiz.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4F1E7F6B278ABAD200F209C3 /* tabBar */ = {
+			isa = PBXGroup;
+			children = (
+				4F1E7F69278AB6F500F209C3 /* TabBarController.swift */,
+				4F1E7F6C278ABAEC00F209C3 /* TabBarTag.swift */,
+			);
+			path = tabBar;
 			sourceTree = "<group>";
 		};
 		B2D3F68772B2844D7EBCEAB9 /* Frameworks */ = {
@@ -314,7 +372,6 @@
 				0621F7AB2785EDAB00BF5F17 /* .gitignore in Resources */,
 				4F0840D12785699F0082D259 /* LaunchScreen.storyboard in Resources */,
 				4F0840CE2785699F0082D259 /* Assets.xcassets in Resources */,
-				4F0840CC2785699E0082D259 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,18 +443,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1E7F67278AB64400F209C3 /* QuizType.swift in Sources */,
+				4F1E7F63278AB64400F209C3 /* QuizTableViewCell.swift in Sources */,
 				0653E182278A709100F92249 /* LoginViewController.swift in Sources */,
 				06243C8E27869B58009EC79C /* SignUpViewController.swift in Sources */,
 				0653E17E2788776900F92249 /* Rank.swift in Sources */,
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
 				0653E17C2788769900F92249 /* MyPageTableViewController.swift in Sources */,
+				4F1E7F64278AB64400F209C3 /* QuizViewController.swift in Sources */,
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
 				4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */,
+				4F1E7F6A278AB6F500F209C3 /* TabBarController.swift in Sources */,
 				4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */,
 				0653E189278A72D500F92249 /* Api.swift in Sources */,
 				0653E187278A71CB00F92249 /* LoginViewModel.swift in Sources */,
 				0653E1802788792300F92249 /* MyPageTableViewCell.swift in Sources */,
 				0621F7B42785EFB200BF5F17 /* UIColor+.swift in Sources */,
+				4F1E7F66278AB64400F209C3 /* QuizViewModel.swift in Sources */,
+				4F1E7F65278AB64400F209C3 /* Quiz.swift in Sources */,
+				4F1E7F6D278ABAEC00F209C3 /* TabBarTag.swift in Sources */,
 				4F5ACFCB2789E98400A62002 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,14 +499,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4F0840CA2785699E0082D259 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F0840CB2785699E0082D259 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4F0840CF2785699F0082D259 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

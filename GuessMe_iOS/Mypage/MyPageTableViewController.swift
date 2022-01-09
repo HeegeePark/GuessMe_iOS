@@ -19,6 +19,20 @@ class MyPageTableViewController : UIViewController{
         setLayout()
     }
     
+    // 탭바 연결
+    static func instance() -> UINavigationController {
+        let mypageVC = MyPageTableViewController(nibName: nil, bundle: nil).then {
+            $0.tabBarItem = UITabBarItem(
+                title: "마이페이지",
+                image: UIImage(systemName: "person.circle"),
+                tag: tabBarTag.mypage.rawValue)
+        }
+        
+        return UINavigationController(rootViewController: mypageVC).then {
+            $0.setNavigationBarHidden(true, animated: false)
+        }
+    }
+    
     
     //MARK: - Private
     
@@ -35,7 +49,7 @@ class MyPageTableViewController : UIViewController{
         view.backgroundColor = .white
         
         menuButton = UIButton().then{
-            let img = UIImage(cgImage:UIImage(systemName: "ellipsis", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .medium))!.cgImage!, scale: 1 , orientation: .left).withTintColor(.accentColor!, renderingMode: .alwaysOriginal)
+            let img = UIImage(cgImage:UIImage(systemName: "ellipsis", withConfiguration: UIImage.SymbolConfiguration(pointSize: 10, weight: .bold, scale: .medium))!.cgImage!, scale: 1 , orientation: .left).withTintColor(.accentColor!, renderingMode: .alwaysOriginal)
             $0.setImage(img, for: .normal)
             self.view.addSubview($0)
             
@@ -61,7 +75,7 @@ class MyPageTableViewController : UIViewController{
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         tableView.snp.makeConstraints{
             $0.top.equalTo(title.snp.bottom).offset(30)
-            $0.bottom.equalToSuperview()
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
@@ -80,7 +94,7 @@ extension MyPageTableViewController: UICollectionViewDelegateFlowLayout, UIColle
         return Rank.getDummy().count
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 50
+        return 25
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

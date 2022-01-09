@@ -28,15 +28,19 @@ class MainViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     
-    // 탭바 (일단 보류)
-//    static func instance() -> UINavigationController {
-//        let mainVC = MainViewController(nibName: nil, bundle: nil).then {
-//            $0.tabBarItem = UITabBarItem(
-//                title: "퀴즈",
-//                image: UIImage(named: "questionmark"),
-//                tag: 1)
-//        }
-//    }
+    // 탭바 연결
+    static func instance() -> UINavigationController {
+        let mainVC = MainViewController(nibName: nil, bundle: nil).then {
+            $0.tabBarItem = UITabBarItem(
+                title: "퀴즈",
+                image: UIImage(systemName: "questionmark.circle"),
+                tag: tabBarTag.main.rawValue)
+        }
+        
+        return UINavigationController(rootViewController: mainVC).then {
+            $0.setNavigationBarHidden(true, animated: false)
+        }
+    }
     
     // MARK: - Actions
     private func bindViewModel() {
@@ -62,6 +66,7 @@ class MainViewController: UIViewController {
 
     // MARK: - 레이아웃 설정
     private func setUpLayout() {
+        self.view.backgroundColor = .white
         // 로고
         _ = UIImageView().then {
             $0.image = #imageLiteral(resourceName: "img_main_title")
