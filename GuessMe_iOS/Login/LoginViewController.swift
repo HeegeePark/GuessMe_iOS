@@ -16,7 +16,11 @@ class LoginViewController: UIViewController{
         super.viewDidLoad()
         setUp()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setUp()
+        viewModel = LoginViewModel()
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         disposeBag = DisposeBag()
@@ -245,7 +249,7 @@ class LoginViewController: UIViewController{
     }
 
     private var disposeBag = DisposeBag()
-    private let viewModel = LoginViewModel()
+    private var viewModel = LoginViewModel()
     
     private weak var loadingView: UIView!
     private weak var loadingIndicator: UIActivityIndicatorView!
