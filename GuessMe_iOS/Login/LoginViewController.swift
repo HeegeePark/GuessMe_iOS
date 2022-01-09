@@ -24,25 +24,7 @@ class LoginViewController: UIViewController{
         viewModel = LoginViewModel()
         if let _ = UserDefaults.standard.string(forKey: "token"){
             self.startLoading()
-            self.viewModel.isUserHasQuiz().observeOn(MainScheduler.instance).subscribe(onSuccess: {
-                var vc: UIViewController
-                if $0{//퀴즈를 가지고 있을 때
-                    vc = TabBarController()
-                    
-                }
-                else{
-                    vc = QuizViewController()
-                }
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true){
-                    self.stopLoading()
-                }
-            }, onError: {
-                print($0.localizedDescription)
-                let alert = UIAlertController(title: "로그인", message: "서버 에러", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                self.present(alert, animated: true)
-            }).disposed(by: self.disposeBag)
+            self.nextViewPresent()
         }
     }
     
@@ -53,7 +35,30 @@ class LoginViewController: UIViewController{
     }
     //MARK: - Private
     
-    
+    //MARK: - 다음 화면 전환
+    private func nextViewPresent(){
+        self.viewModel.isUserHasQuiz().observeOn(MainScheduler.instance).subscribe(onSuccess: {
+            var vc: UIViewController
+            if $0{//퀴즈를 가지고 있을 때
+                vc = TabBarController()
+                
+            }
+            else{
+                vc = QuizViewController()
+            }
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true){
+                if self.loadingIndicator.isAnimating{
+                    self.stopLoading()
+                }
+            }
+        }, onError: {
+            print($0.localizedDescription)
+            let alert = UIAlertController(title: "로그인", message: "서버 에러", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+            self.present(alert, animated: true)
+        }).disposed(by: self.disposeBag)
+    }
     //MARK: - 로딩 설정
     private func startLoading(){
         loadingView.isHidden = false
@@ -103,28 +108,11 @@ class LoginViewController: UIViewController{
                 self.present(alert, animated: true)
                 return
             }
+            
             self.startLoading()
             self.viewModel.login(id:id, password: password).subscribe(onSuccess: {
                 if $0{
-                    self.viewModel.isUserHasQuiz().observeOn(MainScheduler.instance).subscribe(onSuccess: {
-                        var vc: UIViewController
-                        if $0{//퀴즈를 가지고 있을 때
-                            vc = TabBarController()
-                            
-                        }
-                        else{
-                            vc = QuizViewController()
-                        }
-                        vc.modalPresentationStyle = .fullScreen
-                        self.present(vc, animated: true){
-                            self.stopLoading()
-                        }
-                    }, onError: {
-                        print($0.localizedDescription)
-                        let alert = UIAlertController(title: "로그인", message: "서버 에러", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "확인", style: .cancel))
-                        self.present(alert, animated: true)
-                    }).disposed(by: self.disposeBag)
+                    self.nextViewPresent()
                 }
                 else{
                     self.stopLoading()
@@ -187,7 +175,6 @@ class LoginViewController: UIViewController{
             $0.snp.makeConstraints{
                 $0.centerY.equalToSuperview()
                 $0.height.width.equalTo(110)
-                
                 $0.trailing.equalTo(self.view.safeAreaLayoutGuide.snp.trailing).inset(20)
             }
         }
