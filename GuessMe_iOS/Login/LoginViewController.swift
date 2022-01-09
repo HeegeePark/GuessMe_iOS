@@ -14,9 +14,7 @@ import Then
 class LoginViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLayout()
-        setLoginButton()
-        setSignUpLabel()
+        setUp()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -25,6 +23,25 @@ class LoginViewController: UIViewController{
         viewModel.disposeBag = DisposeBag()
     }
     //MARK: - Private
+    
+    
+    //MARK: - 로딩 설정
+    private func startLoading(){
+        loadingView.isHidden = false
+        loadingIndicator.isHidden = false
+        loadingIndicator.startAnimating()
+    }
+    private func stopLoading(){
+        loadingView.isHidden = true
+        loadingIndicator.isHidden = true
+        loadingIndicator.stopAnimating()
+    }
+    //MARK: - setUp
+    private func setUp(){
+        setLayout()
+        setLoginButton()
+        setSignUpLabel()
+    }
     
     //MARK: - 회원가입 Label 설정
     @objc
@@ -57,11 +74,11 @@ class LoginViewController: UIViewController{
                 self.present(alert, animated: true)
                 return
             }
-
-            
+            self.startLoading()
             self.viewModel.login(id:id, password: password).subscribe(onSuccess: {
+                self.stopLoading()
                 if $0{
-                    let vc = MainViewController()
+                    let vc = TabBarController()
                     vc.modalPresentationStyle = .fullScreen
                     self.present(vc, animated: true)
                 }
@@ -71,6 +88,7 @@ class LoginViewController: UIViewController{
                     self.present(alert, animated: true)
                 }
             }, onError: {
+                self.stopLoading()
                 print($0.localizedDescription)
                 let alert = UIAlertController(title: "로그인", message: "서버 에러", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "확인", style: .cancel))
@@ -123,8 +141,8 @@ class LoginViewController: UIViewController{
 
             $0.snp.makeConstraints{
                 $0.centerY.equalToSuperview()
-                $0.width.equalTo(110)
-                $0.height.equalTo(110)
+                $0.height.width.equalTo(110)
+                
                 $0.trailing.equalTo(self.view.safeAreaLayoutGuide.snp.trailing).inset(20)
             }
         }
@@ -203,10 +221,34 @@ class LoginViewController: UIViewController{
                 $0.leading.equalTo(bottomLabel.snp.trailing).offset(10)
             }
         }
+        
+        loadingView = UIView().then{
+            $0.backgroundColor = .black
+            $0.layer.opacity = 0.5
+            $0.isHidden = true
+            self.view.addSubview($0)
+            
+            $0.snp.makeConstraints{
+                $0.top.bottom.left.right.equalToSuperview()
+            }
+        }
+        
+        loadingIndicator = UIActivityIndicatorView(style: .large).then{
+            $0.isHidden = true
+            $0.color = .gray
+            loadingView.addSubview($0)
+            
+            $0.snp.makeConstraints{
+                $0.centerX.centerY.equalToSuperview()
+            }
+        }
     }
 
     private var disposeBag = DisposeBag()
     private let viewModel = LoginViewModel()
+    
+    private weak var loadingView: UIView!
+    private weak var loadingIndicator: UIActivityIndicatorView!
     
     private weak var signUpLabel: UILabel!
     private weak var idTextField: UITextField!

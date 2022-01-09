@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		0621F7AB2785EDAB00BF5F17 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 0621F7AA2785EDAB00BF5F17 /* .gitignore */; };
 		0621F7B42785EFB200BF5F17 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0621F7B32785EFB200BF5F17 /* UIColor+.swift */; };
-		06243C8E27869B58009EC79C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06243C8D27869B58009EC79C /* SignUpViewController.swift */; };
-		0653E17C2788769900F92249 /* MyPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E17B2788769900F92249 /* MyPageTableViewController.swift */; };
-		0653E17E2788776900F92249 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E17D2788776900F92249 /* Rank.swift */; };
-		0653E1802788792300F92249 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E17F2788792300F92249 /* MyPageTableViewCell.swift */; };
 		0653E182278A709100F92249 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0621F7B02785EE1000BF5F17 /* LoginViewController.swift */; };
 		0653E187278A71CB00F92249 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E186278A71CB00F92249 /* LoginViewModel.swift */; };
 		0653E189278A72D500F92249 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E188278A72D500F92249 /* Api.swift */; };
 		0653E18D278A7F0900F92249 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0653E18C278A7F0900F92249 /* SignUpViewModel.swift */; };
 		06E1DAE5278A9AB500F2FD76 /* TokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAE4278A9AB500F2FD76 /* TokenInterceptor.swift */; };
+		06E1DAF0278ACB5E00F2FD76 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAEF278ACB5E00F2FD76 /* Rank.swift */; };
+		06E1DAF3278ACB6C00F2FD76 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAF1278ACB6C00F2FD76 /* MyPageTableViewCell.swift */; };
+		06E1DAF4278ACB6C00F2FD76 /* MyPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAF2278ACB6C00F2FD76 /* MyPageTableViewController.swift */; };
+		06E1DAF6278ACBE500F2FD76 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAF5278ACBE500F2FD76 /* SignUpViewController.swift */; };
 		4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C42785699E0082D259 /* AppDelegate.swift */; };
 		4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C62785699E0082D259 /* SceneDelegate.swift */; };
 		4F0840C92785699E0082D259 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C82785699E0082D259 /* MainViewController.swift */; };
@@ -59,14 +59,14 @@
 		0621F7AA2785EDAB00BF5F17 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		0621F7B02785EE1000BF5F17 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0621F7B32785EFB200BF5F17 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
-		06243C8D27869B58009EC79C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		0653E17B2788769900F92249 /* MyPageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewController.swift; sourceTree = "<group>"; };
-		0653E17D2788776900F92249 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
-		0653E17F2788792300F92249 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		0653E186278A71CB00F92249 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		0653E188278A72D500F92249 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		0653E18C278A7F0900F92249 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		06E1DAE4278A9AB500F2FD76 /* TokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInterceptor.swift; sourceTree = "<group>"; };
+		06E1DAEF278ACB5E00F2FD76 /* Rank.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
+		06E1DAF1278ACB6C00F2FD76 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
+		06E1DAF2278ACB6C00F2FD76 /* MyPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewController.swift; sourceTree = "<group>"; };
+		06E1DAF5278ACBE500F2FD76 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		288071CEA52D49557F7512AD /* Pods-GuessMe_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		443B4D71CD87CE38E2B5C099 /* Pods_GuessMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuessMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0840C12785699E0082D259 /* GuessMe_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessMe_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,7 +142,7 @@
 		0653E18B278A7EC800F92249 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				06243C8D27869B58009EC79C /* SignUpViewController.swift */,
+				06E1DAF5278ACBE500F2FD76 /* SignUpViewController.swift */,
 				0653E18C278A7F0900F92249 /* SignUpViewModel.swift */,
 			);
 			path = SignUp;
@@ -197,10 +197,6 @@
 				4F0840CD2785699F0082D259 /* Assets.xcassets */,
 				4F0840CF2785699F0082D259 /* LaunchScreen.storyboard */,
 				4F0840D22785699F0082D259 /* Info.plist */,
-				06243C8D27869B58009EC79C /* SignUpViewController.swift */,
-				0653E17B2788769900F92249 /* MyPageTableViewController.swift */,
-				0653E17F2788792300F92249 /* MyPageTableViewCell.swift */,
-				0653E17D2788776900F92249 /* Rank.swift */,
 				0653E188278A72D500F92249 /* Api.swift */,
 				06E1DAE4278A9AB500F2FD76 /* TokenInterceptor.swift */,
 			);
@@ -248,8 +244,8 @@
 		4F1E7F5D278AB5D800F209C3 /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
-				0653E17B2788769900F92249 /* MyPageTableViewController.swift */,
-				0653E17F2788792300F92249 /* MyPageTableViewCell.swift */,
+				06E1DAF1278ACB6C00F2FD76 /* MyPageTableViewCell.swift */,
+				06E1DAF2278ACB6C00F2FD76 /* MyPageTableViewController.swift */,
 			);
 			path = Mypage;
 			sourceTree = "<group>";
@@ -257,7 +253,7 @@
 		4F1E7F68278AB65800F209C3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0653E17D2788776900F92249 /* Rank.swift */,
+				06E1DAEF278ACB5E00F2FD76 /* Rank.swift */,
 				4F1E7F60278AB64400F209C3 /* Quiz.swift */,
 			);
 			path = Model;
@@ -497,15 +493,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E1DAF6278ACBE500F2FD76 /* SignUpViewController.swift in Sources */,
+				06E1DAF0278ACB5E00F2FD76 /* Rank.swift in Sources */,
 				4F1E7F67278AB64400F209C3 /* QuizType.swift in Sources */,
 				4F1E7F63278AB64400F209C3 /* QuizTableViewCell.swift in Sources */,
 				0653E182278A709100F92249 /* LoginViewController.swift in Sources */,
-				06243C8E27869B58009EC79C /* SignUpViewController.swift in Sources */,
-				0653E17E2788776900F92249 /* Rank.swift in Sources */,
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
-				0653E17C2788769900F92249 /* MyPageTableViewController.swift in Sources */,
 				4F1E7F64278AB64400F209C3 /* QuizViewController.swift in Sources */,
+				06E1DAF3278ACB6C00F2FD76 /* MyPageTableViewCell.swift in Sources */,
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
+				06E1DAF4278ACB6C00F2FD76 /* MyPageTableViewController.swift in Sources */,
 				0653E18D278A7F0900F92249 /* SignUpViewModel.swift in Sources */,
 				06E1DAE5278A9AB500F2FD76 /* TokenInterceptor.swift in Sources */,
 				4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */,
@@ -513,7 +510,6 @@
 				4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */,
 				0653E189278A72D500F92249 /* Api.swift in Sources */,
 				0653E187278A71CB00F92249 /* LoginViewModel.swift in Sources */,
-				0653E1802788792300F92249 /* MyPageTableViewCell.swift in Sources */,
 				0621F7B42785EFB200BF5F17 /* UIColor+.swift in Sources */,
 				4F1E7F66278AB64400F209C3 /* QuizViewModel.swift in Sources */,
 				4F1E7F65278AB64400F209C3 /* Quiz.swift in Sources */,
