@@ -18,6 +18,7 @@
 		06E1DAF3278ACB6C00F2FD76 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAF1278ACB6C00F2FD76 /* MyPageTableViewCell.swift */; };
 		06E1DAF4278ACB6C00F2FD76 /* MyPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAF2278ACB6C00F2FD76 /* MyPageTableViewController.swift */; };
 		06E1DAF6278ACBE500F2FD76 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAF5278ACBE500F2FD76 /* SignUpViewController.swift */; };
+		06E1DAF8278ACED000F2FD76 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E1DAF7278ACED000F2FD76 /* MyPageViewModel.swift */; };
 		4F0840C52785699E0082D259 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C42785699E0082D259 /* AppDelegate.swift */; };
 		4F0840C72785699E0082D259 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C62785699E0082D259 /* SceneDelegate.swift */; };
 		4F0840C92785699E0082D259 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0840C82785699E0082D259 /* MainViewController.swift */; };
@@ -67,6 +68,7 @@
 		06E1DAF1278ACB6C00F2FD76 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
 		06E1DAF2278ACB6C00F2FD76 /* MyPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageTableViewController.swift; sourceTree = "<group>"; };
 		06E1DAF5278ACBE500F2FD76 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		06E1DAF7278ACED000F2FD76 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		288071CEA52D49557F7512AD /* Pods-GuessMe_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessMe_iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-GuessMe_iOSTests/Pods-GuessMe_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		443B4D71CD87CE38E2B5C099 /* Pods_GuessMe_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuessMe_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F0840C12785699E0082D259 /* GuessMe_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessMe_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +248,7 @@
 			children = (
 				06E1DAF1278ACB6C00F2FD76 /* MyPageTableViewCell.swift */,
 				06E1DAF2278ACB6C00F2FD76 /* MyPageTableViewController.swift */,
+				06E1DAF7278ACED000F2FD76 /* MyPageViewModel.swift */,
 			);
 			path = Mypage;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
 				4F1E7F64278AB64400F209C3 /* QuizViewController.swift in Sources */,
 				06E1DAF3278ACB6C00F2FD76 /* MyPageTableViewCell.swift in Sources */,
+				06E1DAF8278ACED000F2FD76 /* MyPageViewModel.swift in Sources */,
 				4F0840C92785699E0082D259 /* MainViewController.swift in Sources */,
 				06E1DAF4278ACB6C00F2FD76 /* MyPageTableViewController.swift in Sources */,
 				0653E18D278A7F0900F92249 /* SignUpViewModel.swift in Sources */,
