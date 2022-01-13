@@ -9,27 +9,78 @@ import Foundation
 import UIKit
 import SnapKit
 import Then
+import RxSwift
 
 class QuizTableViewCell: UICollectionViewCell {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUpLayout()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
     // MARK: - Properties
-    var answer = 0
+    var answer = -1
+    private let cellDisposeBag = DisposeBag()
+    
+    var disposeBag = DisposeBag()
     
     private weak var quizLabel: UILabel!
     private weak var yesButton: UIButton!
     private weak var noButton: UIButton!
     
-    // MARK: - 데이터 바인딩
+    // MARK: - Actions
+    override init(frame: CGRect) {
+        
+        super.init(frame: frame)
+        setUpLayout()
+        
+        self.yesButton.rx.tap
+            .subscribe(onNext: {
+                switch self.answer {
+                case 0:
+                    self.setYesButton()
+                case 1:
+                    self.clearYesNo()
+                default:
+                    self.setYesButton()
+                }
+            })
+
+        self.noButton.rx.tap
+            .subscribe(onNext: {
+                switch self.answer {
+                case 0:
+                    self.clearYesNo()
+                case 1:
+                    self.setNoButton()
+                default:
+                    self.setNoButton()
+                }
+            })
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
+    
     public func bind(quiz: Quiz){
         quizLabel.text = quiz.content
+    }
+    
+    private func setYesButton() {
+        self.yesButton.isSelected = !self.yesButton.isSelected
+        self.noButton.isSelected = false
+        self.answer = 1
+    }
+    
+    private func setNoButton() {
+        self.noButton.isSelected = !self.noButton.isSelected
+        self.yesButton.isSelected = false
+        self.answer = 0
+    }
+    
+    private func clearYesNo() {
+        self.yesButton.isSelected = false
+        self.noButton.isSelected = false
+        self.answer = -1
     }
     
     // MARK: - 레이아웃 설정
@@ -80,10 +131,6 @@ class QuizTableViewCell: UICollectionViewCell {
                 $0.trailing.equalTo(self.yesButton.snp.leading).offset(10)
             }
         }
-
-        
-
-        
     }
 }
 
