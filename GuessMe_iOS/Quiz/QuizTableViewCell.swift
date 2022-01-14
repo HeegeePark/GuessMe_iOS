@@ -14,8 +14,7 @@ import RxSwift
 class QuizTableViewCell: UICollectionViewCell {
     // MARK: - Properties
     var answer = -1
-    private let cellDisposeBag = DisposeBag()
-    
+    var onSelect: ((Int) -> Void)?
     var disposeBag = DisposeBag()
     
     private weak var quizLabel: UILabel!
@@ -24,7 +23,6 @@ class QuizTableViewCell: UICollectionViewCell {
     
     // MARK: - Actions
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
         setUpLayout()
         
@@ -69,12 +67,14 @@ class QuizTableViewCell: UICollectionViewCell {
         self.yesButton.isSelected = !self.yesButton.isSelected
         self.noButton.isSelected = false
         self.answer = 1
+        onSelect?(answer)
     }
     
     private func setNoButton() {
         self.noButton.isSelected = !self.noButton.isSelected
         self.yesButton.isSelected = false
         self.answer = 0
+        onSelect?(answer)
     }
     
     private func clearYesNo() {

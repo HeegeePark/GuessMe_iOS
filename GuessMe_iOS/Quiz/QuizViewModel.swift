@@ -12,34 +12,75 @@ import RxCocoa
 final class QuizViewModel {
     let input = Input()
     let output = Output()
+    let quizType: QuizType = .create(UserDefaults.standard.string(forKey: "id")!)
     
     private let disposeBag = DisposeBag()
     private var currentAnswers: [Int] = []
     
     struct Input {
-        let quizType = PublishSubject<QuizType>()
-        var quizList = PublishSubject<[Quiz]>()
-        let tapButton = PublishSubject<Void>()
+        var quizObservable = BehaviorSubject<[Quiz]>(value: Quiz.getDummy())
+        lazy var currentAnswers = quizObservable.map {
+            $0.map { $0.answer }
+        }
+        let tapSubmitButton = PublishSubject<String>()
     }
     
     struct Output {
         let showErrorAlert = PublishRelay<Void>()
-        let score = PublishRelay<Int>()
+        var quizObservable = PublishRelay<[Quiz]>()
+        lazy var answers = quizObservable.map {
+            $0.map { $0.answer }
+        }
+        var score = Observable.just(0)
     }
     
     init() {
-        self.input.tapButton
-            .subscribe(onNext: self.onTapButton)
+        self.input.tapSubmitButton
+            .subscribe(onNext: self.onTapSubmitButton(id:))
             .disposed(by: self.disposeBag)
     }
     
-    private func onTapButton() {
-        /// 생성: answer 값 수정 | 풀이: 채점하고
-        // 실패 시 에러 로그
+    private func onTapSubmitButton(id: String) {
+        switch self.quizType {
+        case .create(id):
+            self.createQuiz()
+        case .solve(id):
+            self.calculateScore()
+        default:
+            self.output.showErrorAlert.accept(())
+        }
+    }
+    
+    // 퀴즈 생성
+    private func createQuiz() {
+        print("무야호")
     }
     
     // 점수 계산
     private func calculateScore() {
-        self.output.score.accept(100)
+        print("계산")
+//        _ = Observable.zip(self.input.quizObservable, self.output.quizObservable) { original, solved in
+//            print(original)
+//            print(solved)
+//        }
+    }
+    
+    // 퀴즈 값 선택
+    func selectAnswer(item: Quiz, selected: Int) {
+        _ = self.input.quizObservable
+            .map { quizzes in
+                quizzes.map { q in
+                    if q.quizId == item.quizId {
+                        print(selected)
+                        return Quiz(quizId: q.quizId, content: q.content, answer: selected)
+                    } else {
+                        return Quiz(quizId: q.quizId, content: q.content, answer: q.answer)
+                    }
+                }
+            }
+            .take(1)
+            .subscribe(onNext: {
+                self.output.quizObservable.accept($0)
+            })
     }
 }
