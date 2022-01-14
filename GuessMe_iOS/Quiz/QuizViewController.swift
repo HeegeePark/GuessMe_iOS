@@ -16,14 +16,15 @@ class QuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.refreshControl = UIRefreshControl()
         setTableView()
         setUpLayout()
+        bindViewModel()
     }
     
     // MARK: - Properties
-    private let id: String = "희지"
-    private var quizType: QuizType = .create("희지")
     private let viewModel = QuizViewModel()
+    private let id: String = UserDefaults.standard.string(forKey: "id")! /*"희지"*/
     private let disposeBag = DisposeBag()
     
     fileprivate let tableView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -31,16 +32,35 @@ class QuizViewController: UIViewController {
     private weak var descriptionLabel: UILabel!
     private weak var submitButton: UIButton!
     
-    // MARK: - Actions
+    // MARK: - Bindings
     private func bindViewModel() {
-        self.viewModel.input
-            .quizType
-            .bind(onNext: self.setQuizType(type:))
-            .disposed(by: disposeBag)
+        // bind input
+        self.submitButton.rx.tap
+            .subscribe(onNext: {
+                self.viewModel.input.tapSubmitButton
+                    .onNext(self.id)
+                self.presentNextVC()
+            })
+            .disposed(by: self.disposeBag)
+        
+        // bind output
+        self.viewModel.output
+            .showErrorAlert
+            .bind(onNext: showErrorAlert)
+            .disposed(by: self.disposeBag)
     }
     
-    private func setQuizType(type: QuizType) {
-        self.quizType = type
+    // MARK: - Actions
+    private func presentNextVC() {
+        let mainVC = TabBarController()
+        mainVC.modalPresentationStyle = .fullScreen
+        self.present(mainVC, animated: false)
+    }
+    
+    private func showErrorAlert() {
+        let alert = UIAlertController(title: "실패", message: "서버 에러", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+        self.present(alert, animated: true)
     }
     
     private func setTableView() {
@@ -63,7 +83,7 @@ class QuizViewController: UIViewController {
         
         // 타이틀 레이블
         titleLabel = UILabel().then {
-            $0.text = self.quizType.title
+            $0.text = self.viewModel.quizType.title
             $0.textColor = .whiteColor
             $0.font = .systemFont(ofSize: 21, weight: .bold)
             self.view.addSubview($0)
@@ -76,7 +96,7 @@ class QuizViewController: UIViewController {
         
         // 설명 레이블
         descriptionLabel = UILabel().then {
-            $0.text = self.quizType.description
+            $0.text = self.viewModel.quizType.description
             $0.textColor = .whiteColor
             $0.font = .systemFont(ofSize: 13, weight: .bold)
             $0.numberOfLines = 2
@@ -93,7 +113,7 @@ class QuizViewController: UIViewController {
         submitButton = UIButton().then {
             $0.backgroundColor = .mainColor
             $0.layer.cornerRadius = 20
-            $0.setTitle(self.quizType.buttonText, for: .normal)
+            $0.setTitle(self.viewModel.quizType.buttonText, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
             $0.titleLabel?.textColor = .whiteColor
             $0.titleLabel?.textAlignment = .center
@@ -110,7 +130,7 @@ class QuizViewController: UIViewController {
         // 테이블 뷰
         self.view.addSubview(tableView)
         tableView.backgroundColor = .whiteColor
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 30, right: 20)
         tableView.snp.makeConstraints {
             $0.top.equalTo(self.descriptionLabel.snp.bottom).offset(110)
             $0.leading.trailing.equalToSuperview()
@@ -121,11 +141,11 @@ class QuizViewController: UIViewController {
 
 // MARK: - CollectionView Extension
 extension QuizViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width - 60, height: 65)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Quiz.getDummy().count
     }
@@ -136,12 +156,23 @@ extension QuizViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "quizCell", for: indexPath) as! QuizTableViewCell
-        let quiz = Quiz.getDummy()[indexPath.row]
-        cell.bind(quiz: quiz)
+        
+        self.viewModel.input
+            .quizObservable
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
+                $0.map { quiz in
+                    cell.bind(quiz: quiz)
+                    cell.onSelect = { [weak self] selected in
+                        self?.viewModel.selectAnswer(item: quiz, selected: selected)
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
 
         return cell
     }
-    
+
 }
 
 //MARK: - Preview
