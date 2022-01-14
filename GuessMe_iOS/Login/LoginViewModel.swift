@@ -30,7 +30,7 @@ final class LoginViewModel{
     }
     
     public func isUserHasQuiz() -> Single<Bool>{
-        let nickname = UserDefaults.standard.string(forKey: "nickname")!
+        let nickname = UserDefaults.standard.string(forKey: "id")!
         return Api.shared.isUserHasQuiz(nickname: nickname)
         
     }

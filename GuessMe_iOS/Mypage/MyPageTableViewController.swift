@@ -93,7 +93,7 @@ class MyPageTableViewController : UIViewController{
         }
         
         let title = UILabel().then{
-            let nickname = UserDefaults.standard.string(forKey: "nickname")
+            let nickname = UserDefaults.standard.string(forKey: "id")
             $0.text = "\(nickname!)의 퀴즈 순위"
             $0.font = .systemFont(ofSize: 40, weight: .bold)
             $0.textColor = .accentColor
