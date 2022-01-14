@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 import RxSwift
 import SwiftyJSON
+import UIKit
 
 enum ApiError: Error{
     case urlEncodingError
@@ -19,6 +20,8 @@ final class Api{
     
     public static let shared = Api()
     
+    
+    // MARK: - Login
     public func login(id:String, password:String) -> Single<JSON>{
         let url = baseUrl + "login"
         let param: Parameters = [
@@ -49,6 +52,34 @@ final class Api{
         }
     }
     
+    public func isUserHasQuiz(nickname: String) -> Single<Bool>{
+        let url = baseUrl + "quizzes/\(nickname)"
+                
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
+            return .create{
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+        
+        return .create{single in
+            AF.request(url,method: .get, interceptor: self.interceptor).responseJSON{
+                switch $0.result{
+                case .success(let data):
+                    let json = JSON(data)["_embedded"]
+                    let quizList = json["quizList"].arrayValue
+                    single(.success(!quizList.isEmpty))
+                case .failure(let error):
+                    single(.error(error))
+                }
+            }
+            
+            return Disposables.create {}
+        }
+
+    }
+    
+    // MARK: - SignUp
     public func signUp(id:String, password:String) -> Completable{
         let url = baseUrl + "users"
         let param: Parameters = [
@@ -101,6 +132,49 @@ final class Api{
         }
     }
     
+    // MARK: - Quiz
+    // 랜덤퀴즈 5개 GET(quizType에 따라 GET 요청)
+    public func getQuizzes(type: QuizType) -> Single<[Quiz]> {
+        var url = baseUrl
+        switch type {
+        case .create(let id): url += "quizzes"
+        case .solve(let id): url += "quizzes/\(id)"
+        }
+        
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return .create {
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create()
+            }
+        }
+        
+        return .create { single in
+            AF.request(encodedUrl, method: .get, interceptor: self.interceptor).responseJSON {
+                switch $0.result {
+                case .success(let data):
+                    let json = JSON(data)
+                    var count = 1
+                    let quizList = json["_embedded"].dictionaryValue["quizList"]!.arrayValue.map { data -> Quiz in
+                        let item = data.dictionaryValue
+                        let quiz = Quiz(quizId: count, content: item["content"]!.stringValue, answer: item["answer"]!.intValue)
+                        count += 1
+                        return quiz
+                    }
+                    single(.success(quizList))
+                case .failure(let error):
+                    single(.error(error))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    // 퀴즈생성 POST (/quizzes)
+    
+    // 퀴즈풀이 점수 POST (/quizzes/nickname)
+    
+    
+    // MARK: - MyPage
     public func getRank() -> Single<[Rank]>{
         let url = baseUrl + "users/rank"
                 
@@ -131,32 +205,7 @@ final class Api{
             return Disposables.create {}
         }
     }
-    public func isUserHasQuiz(nickname: String) -> Single<Bool>{
-        let url = baseUrl + "quizzes/\(nickname)"
-                
-        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else{
-            return .create{
-                $0(.error(ApiError.urlEncodingError))
-                return Disposables.create {}
-            }
-        }
-        
-        return .create{single in
-            AF.request(url,method: .get, interceptor: self.interceptor).responseJSON{
-                switch $0.result{
-                case .success(let data):
-                    let json = JSON(data)["_embedded"]
-                    let quizList = json["quizList"].arrayValue
-                    single(.success(!quizList.isEmpty))
-                case .failure(let error):
-                    single(.error(error))
-                }
-            }
-            
-            return Disposables.create {}
-        }
-
-    }
+    
     public func deleteQuiz() -> Completable{
         let url = baseUrl + "quizzes"
                 
