@@ -18,7 +18,7 @@ final class QuizViewModel {
     private var currentAnswers: [Int] = []
     
     struct Input {
-        var quizObservable = BehaviorSubject<[Quiz]>(value: Quiz.getDummy())
+        var quizObservable = BehaviorSubject<[Quiz]>(value: [])
         lazy var currentAnswers = quizObservable.map {
             $0.map { $0.answer }
         }
@@ -35,6 +35,13 @@ final class QuizViewModel {
     }
     
     init() {
+        // 퀴즈 문항 GET
+        Api.shared.getQuizzes(type: self.quizType).subscribe(onSuccess: {
+            self.input.quizObservable.onNext($0)
+        }, onError: {
+            print($0.localizedDescription)
+        }).disposed(by: self.disposeBag)
+        
         self.input.tapSubmitButton
             .subscribe(onNext: self.onTapSubmitButton(id:))
             .disposed(by: self.disposeBag)
