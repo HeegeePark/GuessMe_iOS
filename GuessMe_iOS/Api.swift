@@ -15,7 +15,6 @@ enum ApiError: Error{
     case urlEncodingError
 }
 
-
 final class Api{
     
     public static let shared = Api()
@@ -144,7 +143,7 @@ final class Api{
         guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return .create {
                 $0(.error(ApiError.urlEncodingError))
-                return Disposables.create()
+                return Disposables.create {}
             }
         }
         
@@ -169,7 +168,33 @@ final class Api{
         }
     }
     
-    // 퀴즈생성 POST (/quizzes)
+    // 퀴즈생성 POST
+    public func createQuiz(quizzes: [Quiz]) -> Completable {
+        let url = baseUrl + "quizzes"
+        let arr = Array(quizzes.map { $0.toParameters() })
+        let param: Parameters = [
+            "data": arr
+        ]
+        
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return .create {
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+        
+        return .create { completable in
+            AF.request(encodedUrl, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON {
+                switch $0.result {
+                case .success(_):
+                    completable(.completed)
+                case .failure(let error):
+                    completable(.error(error))
+                }
+            }
+            return Disposables.create {}
+        }
+    }
     
     // 퀴즈풀이 점수 POST (/quizzes/nickname)
     
