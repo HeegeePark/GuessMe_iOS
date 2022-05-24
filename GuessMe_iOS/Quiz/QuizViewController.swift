@@ -35,6 +35,30 @@ class QuizViewController: UIViewController {
     // MARK: - Bindings
     private func bindViewModel() {
         // bind input
+//        self.viewModel.input
+//            .quizObservable
+//            .observeOn(MainScheduler.instance)
+//            .bind(to: self.tableView.rx.items(cellIdentifier: "quizCell",
+//                                              cellType: QuizTableViewCell.self)) { _, item, cell in
+//                cell.bind(quiz: item)
+//                cell.onSelect = { [weak self] selected in
+//                    self?.viewModel.selectAnswer(item: item, selected: selected)
+//                }
+//            }
+//            .disposed(by: disposeBag)
+        
+        self.viewModel.input
+            .quizObservable
+            .observeOn(MainScheduler.instance)
+            .bind(to: self.tableView.rx.items(cellIdentifier: "quizCell",
+                                              cellType: QuizTableViewCell.self)) { _, item, cell in
+                cell.bind(quiz: item)
+                cell.onSelect = { [weak self] selected in
+                    self?.viewModel.selectAnswer(item: item, selected: selected)
+                }
+            }
+            .disposed(by: disposeBag)
+        
         self.submitButton.rx.tap
             .subscribe(onNext: {
                 self.viewModel.input.tapSubmitButton
@@ -65,7 +89,7 @@ class QuizViewController: UIViewController {
     
     private func setTableView() {
         tableView.delegate = self
-        tableView.dataSource = self
+        tableView.dataSource = nil
         tableView.register(QuizTableViewCell.self, forCellWithReuseIdentifier: "quizCell")
     }
     
@@ -140,39 +164,19 @@ class QuizViewController: UIViewController {
 }
 
 // MARK: - CollectionView Extension
-extension QuizViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension QuizViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width - 60, height: 65)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Quiz.getDummy().count
+        return 5
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 30
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "quizCell", for: indexPath) as! QuizTableViewCell
-        
-        self.viewModel.input
-            .quizObservable
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: {
-                $0.map { quiz in
-                    cell.bind(quiz: quiz)
-                    cell.onSelect = { [weak self] selected in
-                        self?.viewModel.selectAnswer(item: quiz, selected: selected)
-                    }
-                }
-            })
-            .disposed(by: disposeBag)
-
-        return cell
-    }
-
 }
 
 //MARK: - Preview
