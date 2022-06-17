@@ -35,18 +35,6 @@ class QuizViewController: UIViewController {
     // MARK: - Bindings
     private func bindViewModel() {
         // bind input
-//        self.viewModel.input
-//            .quizObservable
-//            .observeOn(MainScheduler.instance)
-//            .bind(to: self.tableView.rx.items(cellIdentifier: "quizCell",
-//                                              cellType: QuizTableViewCell.self)) { _, item, cell in
-//                cell.bind(quiz: item)
-//                cell.onSelect = { [weak self] selected in
-//                    self?.viewModel.selectAnswer(item: item, selected: selected)
-//                }
-//            }
-//            .disposed(by: disposeBag)
-        
         self.viewModel.input
             .quizObservable
             .observeOn(MainScheduler.instance)
@@ -54,16 +42,27 @@ class QuizViewController: UIViewController {
                                               cellType: QuizTableViewCell.self)) { _, item, cell in
                 cell.bind(quiz: item)
                 cell.onSelect = { [weak self] selected in
-                    self?.viewModel.selectAnswer(item: item, selected: selected)
+                    self?.viewModel.input.tapAnswerButton
+                        .onNext((item, selected))
                 }
             }
             .disposed(by: disposeBag)
         
         self.submitButton.rx.tap
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: {
-                self.viewModel.input.tapSubmitButton
-                    .onNext(self.id)
-                self.presentNextVC()
+                self.viewModel.onTapSubmitButton(id: self.id).subscribe(onCompleted: {
+                    let alert = UIAlertController(title: "성공", message: "나만의 퀴즈를 만들었습니다.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .default) { (action) in
+                        self.presentNextVC()
+                    })
+                    self.present(alert, animated: true)
+                }, onError: {
+                    print($0.localizedDescription)
+                    let alert = UIAlertController(title: "퀴즈 생성 실패", message: "오류가 발생하였습니다. 다시 시도해 주세요.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                    self.present(alert, animated: true)
+                }).disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
         
