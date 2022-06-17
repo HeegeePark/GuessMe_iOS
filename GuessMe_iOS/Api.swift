@@ -197,7 +197,31 @@ final class Api{
     }
     
     // 퀴즈풀이 점수 POST (/quizzes/nickname)
-    
+    public func solveQuiz(nickname: String, score: String) -> Completable {
+        let url = baseUrl + "quizzes/\(nickname)"
+        let param: Parameters = [
+            "score": score
+        ]
+        
+        guard let encodedUrl = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return .create {
+                $0(.error(ApiError.urlEncodingError))
+                return Disposables.create {}
+            }
+        }
+        
+        return .create { completable in
+            AF.request(encodedUrl, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON {
+                switch $0.result {
+                case .success(_):
+                    completable(.completed)
+                case .failure(let error):
+                    completable(.error(error))
+                }
+            }
+            return Disposables.create {}
+        }
+    }
     
     // MARK: - MyPage
     public func getRank() -> Single<[Rank]>{
@@ -255,7 +279,7 @@ final class Api{
 
     }
     //MARK: -Private
-    private let baseUrl = "https://guessme-ios.herokuapp.com/"
+    private let baseUrl = "https://guess-me-app.herokuapp.com/"
     private let interceptor = TokenInterceptor()
     private init(){}
 }
