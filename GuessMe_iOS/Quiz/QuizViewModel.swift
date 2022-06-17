@@ -13,7 +13,6 @@ final class QuizViewModel {
     public let input = Input()
     public let output = Output()
     public var quizType: QuizType = .create(UserDefaults.standard.string(forKey: "id")!)
-    public let onAnswerChanged: AnyObserver<(Quiz, Int)>
     
     private let disposeBag = DisposeBag()
     private var currentAnswers: [Int] = []
@@ -23,7 +22,7 @@ final class QuizViewModel {
         lazy var currentAnswers = quizObservable.map {
             $0.map { $0.answer }
         }
-        let tapSubmitButton = PublishSubject<String>()
+        let tapAnswerButton = PublishSubject<(Quiz, Int)>()
     }
     
     struct Output {
@@ -32,13 +31,10 @@ final class QuizViewModel {
         lazy var answers = quizObservable.map {
             $0.map { $0.answer }
         }
-        var score = Observable.just(0)
+        lazy var score = PublishSubject<Int>()
     }
     
     init() {
-        let selecting = PublishSubject<(Quiz, Int)>()
-        self.onAnswerChanged = selecting.asObserver()
-        
         // 퀴즈 문항 GET
         Api.shared.getQuizzes(type: self.quizType).subscribe(onSuccess: {
             self.input.quizObservable.onNext($0)
@@ -46,86 +42,78 @@ final class QuizViewModel {
         }, onError: {
             print($0.localizedDescription)
         }).disposed(by: self.disposeBag)
-        
-        selecting.map { quiz, answer in
-            return Quiz(quizId: quiz.quizId, content: quiz.content, answer: answer)
-        }
-        .withLatestFrom(self.input.quizObservable) { (updated, originals) -> [Quiz] in
-            originals.map {
-                guard $0.quizId == updated.quizId else { return $0 }
-                return updated
-            }
-        }
-        .subscribe(onNext: {
-            self.output.quizObservable.accept($0)
-            print($0)
-        })
-        .disposed(by: self.disposeBag)
-        
-        self.input.tapSubmitButton
-            .subscribe(onNext: self.onTapSubmitButton(id:))
+    
+        // Bind Input
+        self.input.tapAnswerButton
+            .subscribe(onNext: self.selectAnswer(item: selected:))
             .disposed(by: self.disposeBag)
+    }
+    
+    public func onTapSubmitButton(id: String) -> Completable {
+        return .create { completable in
+            switch self.quizType {
+            case .create(id):
+                self.createQuiz().subscribe {
+                    completable(.completed)
+                } onError: {
+                    completable(.error($0))
+                }.disposed(by: self.disposeBag)
+
+            case .solve(id):
+                self.calculateScore()
+            default:
+                self.output.showErrorAlert.accept(())
+            }
+            return Disposables.create {}
+        }
         
     }
     
-    private func onTapSubmitButton(id: String) {
-        switch self.quizType {
-        case .create(id):
-            self.createQuiz()
-        case .solve(id):
-            self.calculateScore()
-        default:
-            self.output.showErrorAlert.accept(())
-        }
+    private func onTapAnswerButton(item: Quiz, selected: Int) {
+        self.selectAnswer(item: item, selected: selected)
     }
     
     // 퀴즈 생성
-    private func createQuiz() {
-        print("무야호")
+    private func createQuiz() -> Completable {
+        var quizList = [Quiz]()
+        _ = self.output.quizObservable
+            .map { quizzes in
+                print(quizzes)
+                quizList = quizzes
+            }
+        return .create { completable in
+            Api.shared.createQuiz(quizzes: quizList).subscribe {
+                completable(.completed)
+            } onError: {
+                completable(.error($0))
+            }.disposed(by: self.disposeBag)
+            
+            return Disposables.create {}
+        }
+    }
+    
+    // 퀴즈 제출
+    private func solveQuiz() {
+        self.calculateScore()
     }
     
     // 점수 계산
     private func calculateScore() {
         print("계산")
-//        _ = Observable.zip(self.input.quizObservable, self.output.quizObservable) { original, solved in
-//            print(original)
-//            print(solved)
-//        }
     }
     
-    // 퀴즈 값 선택
-//    func selectAnswer(item: Quiz, selected: Int) {
-//        _ = self.input.quizObservable
-//            .map { quizzes in
-//                quizzes.map { q in
-//                    if q.quizId == item.quizId {
-//                        print("선택: \(selected)")
-//                        return Quiz(quizId: q.quizId, content: q.content, answer: selected)
-//                    } else {
-//                        return Quiz(quizId: q.quizId, content: q.content, answer: q.answer)
-//                    }
-//                }
-//            }
-//            .take(1)
-//            .subscribe(onNext: {
-//                self.output.quizObservable.accept($0)
-//            })
-//    }
-    func selectAnswer(item: Quiz, selected: Int) {
+    // O, X 답 변경 시 output 퀴즈Obs 업데이트
+    private func selectAnswer(item: Quiz, selected: Int) {
         _ = self.input.quizObservable
             .map { quizzes in
-                quizzes.map { q in
-                    if q.quizId == item.quizId {
-                        print("선택: \(selected)")
-                        return Quiz(quizId: q.quizId, content: q.content, answer: selected)
-                    } else {
-                        return Quiz(quizId: q.quizId, content: q.content, answer: q.answer)
-                    }
+                quizzes.map {
+                    guard $0.quizId == item.quizId else { return $0 }
+                    return Quiz(quizId: $0.quizId, content: $0.content, answer: selected)
                 }
             }
             .take(1)
             .subscribe(onNext: {
                 self.output.quizObservable.accept($0)
-            })
+            }).disposed(by: self.disposeBag)
     }
 }
