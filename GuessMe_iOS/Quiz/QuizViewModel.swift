@@ -75,7 +75,7 @@ final class QuizViewModel {
     
     // 퀴즈 생성
     private func createQuiz() -> Completable {
-        var quizList = self.output.quizObservable.value
+        let quizList = self.output.quizObservable.value
         
         return .create { completable in
             Api.shared.createQuiz(quizzes: quizList).subscribe {
