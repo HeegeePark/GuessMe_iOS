@@ -144,7 +144,6 @@ struct QuizTableViewCellRepresentable: UIViewRepresentable{
     
     func makeUIView(context: Context) -> UIView {
         let cell = QuizTableViewCell()
-        cell.bind(quiz: Quiz.getDummy().first!)
         return cell
     }
     func updateUIView(_ uiView: UIView, context: Context) {
