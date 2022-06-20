@@ -184,7 +184,7 @@ final class Api{
         }
         
         return .create { completable in
-            AF.request(encodedUrl, method: .post, parameters: param, encoding: JSONEncoding.default).responseJSON {
+            AF.request(encodedUrl, method: .post, parameters: param, encoding: JSONEncoding.default, interceptor: self.interceptor).responseJSON {
                 switch $0.result {
                 case .success(_):
                     completable(.completed)
