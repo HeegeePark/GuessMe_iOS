@@ -27,7 +27,7 @@ final class QuizViewModel {
     
     struct Output {
         let showErrorAlert = PublishRelay<Void>()
-        var quizObservable = PublishRelay<[Quiz]>()
+        var quizObservable = BehaviorRelay<[Quiz]>(value: [])
         lazy var answers = quizObservable.map {
             $0.map { $0.answer }
         }
@@ -75,12 +75,8 @@ final class QuizViewModel {
     
     // 퀴즈 생성
     private func createQuiz() -> Completable {
-        var quizList = [Quiz]()
-        _ = self.output.quizObservable
-            .map { quizzes in
-                print(quizzes)
-                quizList = quizzes
-            }
+        var quizList = self.output.quizObservable.value
+        
         return .create { completable in
             Api.shared.createQuiz(quizzes: quizList).subscribe {
                 completable(.completed)
