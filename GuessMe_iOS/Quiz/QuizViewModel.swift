@@ -100,7 +100,7 @@ final class QuizViewModel {
     
     // O, X 답 변경 시 output 퀴즈Obs 업데이트
     private func selectAnswer(item: Quiz, selected: Int) {
-        _ = self.input.quizObservable
+        _ = self.output.quizObservable
             .map { quizzes in
                 quizzes.map {
                     guard $0.quizId == item.quizId else { return $0 }
