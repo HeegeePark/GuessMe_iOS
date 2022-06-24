@@ -152,11 +152,9 @@ final class Api{
                 switch $0.result {
                 case .success(let data):
                     let json = JSON(data)
-                    var count = 1
                     let quizList = json["_embedded"].dictionaryValue["quizList"]!.arrayValue.map { data -> Quiz in
                         let item = data.dictionaryValue
-                        let quiz = Quiz(quizId: count, content: item["content"]!.stringValue, answer: item["answer"]!.intValue)
-                        count += 1
+                        let quiz = Quiz(quizId: item["quizId"]!.intValue, content: item["content"]!.stringValue, answer: item["answer"]!.intValue)
                         return quiz
                     }
                     single(.success(quizList))
